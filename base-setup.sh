@@ -83,12 +83,19 @@ partition_drives() {
         echo w;
     ) | sudo fdisk /dev/sda
     
-    read -p 'Listing current partition mapping. Confirm this is correct. (y/n) ' promptConfirmed
-    echo "$promptConfirmed"
+    Mkfs.fat -F32 /dev/sda1
+    Mkswap /dev/sda2
+    swapon /dev/sda2
+    Mkfs.ext4 /dev/sda3
+    Mount /dev/sda3 /mnt
 }
+
 
 setup_base() {
     echo "Setting up the basic arch linux install"
+    
+    pacstrap /mnt base linux linux-firmware
+    
     genfstab -U /mnt >> /mnt/etc/fstab
     arch-chroot /mnt
 
