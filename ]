@@ -1,0 +1,64 @@
+#variables
+# linux-hostname
+# linux-username
+# linux-install-drive
+
+
+echo "Welcome to my Arch Linux install script!!"
+echo "Just a few steps and we'll be off!"
+
+read -p 'Please enter your arch linux hostname : ' linux_hostname
+read -p 'Please enter your arch linux username : ' linux_username
+
+#fdisk -l
+
+partition_drive_prompt() {
+    
+}
+
+echo "======== Display fdisk -l ========"
+read -p 'Please enter your installation drive : ' linux_install_drive
+
+echo "Username : ${linux_hostname}"
+echo "Hostname : ${linux_hostname}"
+echo "Install drive : ${linux_install_drive}"
+
+echo "The drive will have three partitions"
+echo " /dev/sda1 - EFI Boot"
+echo " /dev/sda2 - SWAP"
+echo " /dev/sda3 - /home"
+echo "This will wipe the selected drive, are you sure you want to continue"
+
+(
+                #dev/sda1
+    echo n;     #new partition
+    echo p;     #primary
+    echo ;      #<enter> (default)
+    echo ;      #<enter> (default)
+    echo +550M; #550mb boot space
+    echo t;     #change partition type
+    echo ;      #use default (1)
+    echo ef;    #uefi
+
+    echo n;    
+    echo p;     
+    echo ;
+    echo ;
+    echo +2G;   #2 gig swap space
+    echo t;     #change partition type
+    echo ;      #use default (2)
+    echo 82;    #swap space
+
+    echo n;
+    echo p;
+    echo ;      #<enter> (default)
+    echo ;      #<enter> (default)
+    echo ;      #use rest of disk for main partition
+    echo t;     #change partition type
+    echo ;      #use default (3)
+    echo 83;    #linux
+) | sudo fdisk /dev/sda
+
+fdisk -l        #list the partitions created
+pause
+
