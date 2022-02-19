@@ -88,11 +88,11 @@ partition_drives() {
     fdisk -l
     read -p "Press any key to finish drive setup"
 
-    Mkfs.fat -F32 /dev/sda1
-    Mkswap /dev/sda2
+    mkfs.fat -F32 /dev/sda1
+    mkswap /dev/sda2
     swapon /dev/sda2
-    Mkfs.ext4 /dev/sda3
-    Mount /dev/sda3 /mnt
+    mkfs.ext4 /dev/sda3
+    mount /dev/sda3 /mnt
 }
 
 
