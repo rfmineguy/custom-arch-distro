@@ -3,8 +3,8 @@
 # linux-username
 # linux-install-drive
 
-if [[ $OS_TYPE != "linux-gnu"* ]]; then
-    echo "This script will only run properly on fresh install of arch linux"
+if [[ $OSTYPE != "linux-gnu"* ]]; then
+    echo "This script will only run properly on fresh install of arch linux, your system is $OS_TYPE"
     echo "Running this on anything other than arch linux is not recommended, exitting script"
     echo "Seriously don't run this on anything you care about, severe work in progress"
     echo "AND DO NOT JUST COMMENT OUT THIS SAFEGUARD, its here because this script can erase your drives if your not careful"
