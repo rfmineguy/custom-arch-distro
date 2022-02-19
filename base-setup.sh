@@ -40,7 +40,8 @@ partition_drives() {
     echo " /dev/sda2 - SWAP"
     echo " /dev/sda3 - /home"
     echo "This will wipe the selected drive, are you sure you want to continue"
-    
+    pause 1
+
     #delete existing partitions
     (
         echo d;
@@ -93,7 +94,8 @@ partition_drives() {
 
 setup_base() {
     echo "Setting up the basic arch linux install"
-    
+    sleep 1
+
     pacstrap /mnt base linux linux-firmware
     
     genfstab -U /mnt >> /mnt/etc/fstab
