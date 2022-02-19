@@ -44,13 +44,15 @@ partition_drives() {
 
     #delete existing partitions
     (
+        echo d;     #delete a partition
+        echo ;      #select default option
         echo d;
+        echo ;
         echo d;
-        echo d;
-        echo d;
+        echo ;
         echo w;
     ) | sudo fdisk /dev/sda
-    
+
     #create fresh new partitions
     (
                     #dev/sda1
