@@ -39,8 +39,7 @@ partition_drives() {
     echo " /dev/sda1 - EFI Boot"
     echo " /dev/sda2 - SWAP"
     echo " /dev/sda3 - /home"
-    echo "This will wipe the selected drive, are you sure you want to continue"
-    pause 1
+    read -p "This will wipe the selected drive, are you sure you want to continue"
 
     #delete existing partitions
     (
@@ -86,6 +85,9 @@ partition_drives() {
         echo w;
     ) | sudo fdisk /dev/sda
     
+    fdisk -l
+    read -p "Press any key to finish drive setup"
+
     Mkfs.fat -F32 /dev/sda1
     Mkswap /dev/sda2
     swapon /dev/sda2
